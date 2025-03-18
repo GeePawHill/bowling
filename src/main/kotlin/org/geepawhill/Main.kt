@@ -11,10 +11,12 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.snapshots.SnapshotStateList
@@ -36,7 +38,25 @@ import javax.swing.text.html.CSS.Attribute.FONT_SIZE
 @Preview
 fun App() {
     val model = BowlingModel()
-    PlayersView(model.players)
+    Column {
+        PlayersView(model.players)
+        ControlsView(model)
+    }
+}
+
+@Composable
+fun ControlsView(model: BowlingModel) {
+    Row(Modifier.padding(16.dp)) {
+        Column {
+            Text("Roll Buttons")
+        }
+        Spacer(Modifier.weight(1f))
+        Column {
+            Button({ model.newGame() }) {
+                Text("New Game",fontSize = BUTTON_FONT_SIZE)
+            }
+        }
+    }
 }
 
 @Composable
@@ -114,6 +134,7 @@ val FRAME_WIDTH = ROLL_SIZE*2
 val THREE_FRAME_WIDTH = ROLL_SIZE*3
 val CURRENT_COLOR = Color.LightGray
 val NON_CURRENT_COLOR = Color.White
+val BUTTON_FONT_SIZE = TextUnit(30f, TextUnitType.Sp)
 
 
 fun main() = application {

@@ -20,6 +20,9 @@ class Player(name:String) {
 }
 
 class BowlingModel {
+    fun newGame() {
+    }
+
     val players = mutableStateListOf<Player>()
 
     init {
