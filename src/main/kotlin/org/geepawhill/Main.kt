@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
@@ -35,16 +36,22 @@ fun PlayersView(players: SnapshotStateList<Player>) {
         LazyColumn(modifier = Modifier.weight(1f)) {
             items(players) {
                 Row(modifier = Modifier.weight(1f).height(PLAYER_HEIGHT)) {
-                    Column {
-                        Text(
-                            text = it.name.value,
-                            fontSize = NAME_SIZE
-                        )
-                        Spacer(Modifier.height(4.dp).fillMaxWidth().background(Color.Black))
-                    }
+                    PlayerView(it)
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun PlayerView(player: Player) {
+    Column {
+        Text(
+            text = player.name.value,
+            fontSize = NAME_SIZE
+        )
+        Spacer(modifier = Modifier.weight(.99f))
+        Spacer(Modifier.height(1.dp).fillMaxWidth().background(Color.Black))
     }
 }
 
