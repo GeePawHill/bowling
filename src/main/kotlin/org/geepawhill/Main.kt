@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -38,7 +40,7 @@ import javax.swing.text.html.CSS.Attribute.FONT_SIZE
 @Preview
 fun App() {
     val model = BowlingModel()
-    Column {
+    Column(Modifier.padding(20.dp,0.dp)) {
         PlayersView(model.players)
         ControlsView(model)
     }
@@ -48,7 +50,25 @@ fun App() {
 fun ControlsView(model: BowlingModel) {
     Row(Modifier.padding(16.dp)) {
         Column {
-            Text("Roll Buttons")
+            Row(Modifier.padding(40.dp,16.dp)) {
+                RollButton(model,0,"-")
+                RollButton(model,1)
+                RollButton(model,2)
+                RollButton(model,3)
+                RollButton(model,4)
+            }
+            Row(Modifier.padding(40.dp,16.dp)) {
+                RollButton(model,5)
+                RollButton(model,6)
+                RollButton(model,7)
+                RollButton(model,8)
+                RollButton(model,9)
+            }
+            Row(Modifier.padding(40.dp,16.dp)) {
+                RollButton(model,0,"/") { model.spare() }
+                RollButton(model,0,"X") { model.strike() }
+                RollButton(model,0,"?") { model.random() }
+            }
         }
         Spacer(Modifier.weight(1f))
         Column {
@@ -57,6 +77,17 @@ fun ControlsView(model: BowlingModel) {
             }
         }
     }
+}
+
+@Composable
+fun RollButton(model: BowlingModel, rollNumber: Int,text:String=rollNumber.toString(),
+onClick: ()->Unit= { model.roll(rollNumber) }) {
+    Button(onClick = onClick,
+        shape = CircleShape,
+        ) {
+        Text(text, fontSize = BUTTON_FONT_SIZE)
+    }
+    Spacer(Modifier.width(20.dp))
 }
 
 @Composable

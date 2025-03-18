@@ -23,6 +23,20 @@ class BowlingModel {
     fun newGame() {
     }
 
+    fun roll(i: Int) {
+    }
+
+    fun spare() {
+    }
+
+    fun strike() {
+
+    }
+
+    fun random() {
+
+    }
+
     val players = mutableStateListOf<Player>()
 
     init {
