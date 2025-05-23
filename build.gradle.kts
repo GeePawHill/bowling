@@ -8,6 +8,9 @@ plugins {
 group = "org.geepawhill"
 version = "1.0-SNAPSHOT"
 
+val junitVersion = property("junit.version")
+val assertJVersion = property("assertj.version")
+
 repositories {
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
@@ -20,6 +23,8 @@ dependencies {
     // (in a separate module for demo project and in testMain).
     // With compose.desktop.common you will also lose @Preview functionality
     implementation(compose.desktop.currentOs)
+    testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
+    testImplementation("org.assertj:assertj-core:$assertJVersion")
 }
 
 compose.desktop {
