@@ -17,9 +17,9 @@ import org.geepawhill.Constants.Companion.THREE_FRAME_WIDTH
 fun FrameView(frame: Frame) {
     Column(Modifier.width(if (frame.hasThird) THREE_FRAME_WIDTH else Constants.FRAME_WIDTH).border(1.dp, Color.Black)) {
         Row() {
-            FirstBox()
-            SecondBox()
-            if (frame.hasThird) ThirdBox()
+            FirstBox(frame)
+            SecondBox(frame)
+            if (frame.hasThird) ThirdBox(frame)
         }
         Box(Modifier.fillMaxWidth(1f), contentAlignment = Alignment.Center) {
             Text(frame.score.value, fontSize = Constants.SCORE_FONT_SIZE, textAlign = TextAlign.Center)
@@ -28,22 +28,22 @@ fun FrameView(frame: Frame) {
 }
 
 @Composable
-fun FirstBox() {
+fun FirstBox(frame: Frame) {
     Box(Modifier.width(ROLL_SIZE).height(ROLL_SIZE), contentAlignment = Alignment.Center) {
-        Text("9", fontSize = ROLL_FONT_SIZE, textAlign = TextAlign.Center)
+        Text(frame.first.value, fontSize = ROLL_FONT_SIZE, textAlign = TextAlign.Center)
     }
 }
 
 @Composable
-fun SecondBox() {
+fun SecondBox(frame: Frame) {
     Box(Modifier.width(ROLL_SIZE).height(ROLL_SIZE).border(1.dp, Color.Black), contentAlignment = Alignment.Center) {
-        Text("9", fontSize = ROLL_FONT_SIZE, textAlign = TextAlign.Center)
+        Text(frame.second.value, fontSize = ROLL_FONT_SIZE, textAlign = TextAlign.Center)
     }
 }
 
 @Composable
-fun ThirdBox() {
+fun ThirdBox(frame: Frame) {
     Box(Modifier.width(ROLL_SIZE).height(ROLL_SIZE).border(1.dp, Color.Black), contentAlignment = Alignment.Center) {
-        Text("6", fontSize = ROLL_FONT_SIZE, textAlign = TextAlign.Center)
+        Text(frame.third.value, fontSize = ROLL_FONT_SIZE, textAlign = TextAlign.Center)
     }
 }

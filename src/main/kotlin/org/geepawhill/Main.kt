@@ -21,7 +21,7 @@ fun App() {
 
 
 fun main() = application {
-    val state = rememberWindowState(size = DpSize(1300.dp, 1200.dp))
+    val state = rememberWindowState(size = DpSize(1340.dp, 1200.dp))
 
     Window(
         ::exitApplication,
