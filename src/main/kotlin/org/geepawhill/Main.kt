@@ -14,7 +14,7 @@ import androidx.compose.ui.window.*
 fun App() {
     val model = BowlingModel()
     Column(Modifier.padding(20.dp, 0.dp)) {
-        PlayersView(model.players)
+        PlayersView(model.players, model.current)
         ControlsView(model)
     }
 }
