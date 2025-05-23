@@ -22,7 +22,7 @@ fun FrameView(frame: Frame) {
             if (frame.hasThird) ThirdBox(frame)
         }
         Box(Modifier.fillMaxWidth(1f), contentAlignment = Alignment.Center) {
-            Text(frame.score.value, fontSize = Constants.SCORE_FONT_SIZE, textAlign = TextAlign.Center)
+            Text(frame.total.value, fontSize = Constants.SCORE_FONT_SIZE, textAlign = TextAlign.Center)
         }
     }
 }

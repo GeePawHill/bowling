@@ -16,6 +16,10 @@ class BowlingModel {
     }
 
     fun roll(score: Score) {
+        if (current.value.roll(score)) nextPlayer()
+    }
+
+    private fun nextPlayer() {
         val index = players.indexOf(current.value)
         if (index == -1) return
         if (index == players.size - 1) {
