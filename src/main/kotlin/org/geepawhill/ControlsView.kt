@@ -14,23 +14,23 @@ fun ControlsView(model: BowlingModel) {
     Row(Modifier.padding(16.dp).fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
         Column {
             Row(Modifier.padding(40.dp, 16.dp).fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                RollButton(model, 0, "-")
-                RollButton(model, 1)
-                RollButton(model, 2)
-                RollButton(model, 3)
-                RollButton(model, 4)
+                RollButton(model, score = Score.Zero)
+                RollButton(model, score = Score.One)
+                RollButton(model, score = Score.Two)
+                RollButton(model, score = Score.Three)
+                RollButton(model, score = Score.Four)
             }
             Row(Modifier.padding(40.dp, 16.dp).fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                RollButton(model, 5)
-                RollButton(model, 6)
-                RollButton(model, 7)
-                RollButton(model, 8)
-                RollButton(model, 9)
+                RollButton(model, score = Score.Five)
+                RollButton(model, score = Score.Six)
+                RollButton(model, score = Score.Seven)
+                RollButton(model, score = Score.Eight)
+                RollButton(model, score = Score.Nine)
             }
             Row(Modifier.padding(40.dp, 16.dp).fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                RollButton(model, 0, "/") { model.spare() }
-                RollButton(model, 0, "X") { model.strike() }
-                RollButton(model, 0, "?") { model.random() }
+                RollButton(model, Score.Spare)
+                RollButton(model, Score.Strike)
+                RollButton(model, Score.Random)
             }
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                 Button({ model.newGame() }) {
@@ -43,14 +43,14 @@ fun ControlsView(model: BowlingModel) {
 
 @Composable
 fun RollButton(
-    model: BowlingModel, rollNumber: Int, text: String = rollNumber.toString(),
-    onClick: () -> Unit = { model.roll(rollNumber) }
+    model: BowlingModel, score: Score
 ) {
     Button(
-        onClick = onClick,
+        onClick = { model.roll(score) },
         shape = CircleShape,
+        enabled = model.isEnabled(score)
     ) {
-        Text(text, fontSize = BUTTON_FONT_SIZE)
+        Text(score.asControl(), fontSize = BUTTON_FONT_SIZE)
     }
     Spacer(Modifier.width(20.dp))
 }

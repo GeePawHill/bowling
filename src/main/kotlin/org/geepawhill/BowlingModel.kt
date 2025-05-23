@@ -1,35 +1,18 @@
 package org.geepawhill
 
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-
-class Player(name: String) {
-    val isCurrent = mutableStateOf(false)
-    val name = mutableStateOf(name)
-    val frames = mutableStateListOf<Frame>()
-
-    init {
-        for (f in 0..8) frames.add(Frame())
-        frames.add(Frame(true))
-    }
-}
 
 class BowlingModel {
+
     fun newGame() {
     }
 
-    fun roll(i: Int) {
+    fun roll(score: Score) {
     }
 
-    fun spare() {
-    }
-
-    fun strike() {
-
-    }
-
-    fun random() {
-
+    fun isEnabled(score: Score): Boolean {
+        if (score == Score.Six) return false
+        else return true
     }
 
     val players = mutableStateListOf<Player>()
