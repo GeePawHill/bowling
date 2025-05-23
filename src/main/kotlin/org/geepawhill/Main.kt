@@ -26,14 +26,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.WindowPlacement
-import androidx.compose.ui.window.application
-import androidx.compose.ui.window.rememberWindowState
+import androidx.compose.ui.unit.*
+import androidx.compose.ui.window.*
 import javax.swing.text.html.CSS.Attribute.FONT_SIZE
 
 @Composable
@@ -65,6 +59,7 @@ fun ControlsView(model: BowlingModel) {
                 RollButton(model,9)
             }
             Row(Modifier.padding(40.dp,16.dp)) {
+                Spacer(Modifier.width(80.dp))
                 RollButton(model,0,"/") { model.spare() }
                 RollButton(model,0,"X") { model.strike() }
                 RollButton(model,0,"?") { model.random() }
@@ -92,7 +87,7 @@ onClick: ()->Unit= { model.roll(rollNumber) }) {
 
 @Composable
 fun PlayersView(players: SnapshotStateList<Player>) {
-    Row(modifier = Modifier.fillMaxWidth()) {
+    Row(modifier = Modifier.width(1300.dp)) {
         LazyColumn(modifier = Modifier.weight(1f)) {
             items(players) {
                 Row(modifier = Modifier.weight(1f).height(PLAYER_HEIGHT)) {
@@ -169,7 +164,7 @@ val BUTTON_FONT_SIZE = TextUnit(30f, TextUnitType.Sp)
 
 
 fun main() = application {
-    val state = rememberWindowState(placement = WindowPlacement.Maximized)
+    val state = rememberWindowState(size = DpSize(1300.dp, 1200.dp))
 
     Window(::exitApplication,
         state,
