@@ -14,6 +14,8 @@ class FrameDataDelegate : FrameData {
         get() = rolls.isNotEmpty() && rolls[0] == 10
     override val isSpare: Boolean
         get() = rolls.size == 2 && rolls[0] + rolls[1] == 10
+    override val local: Int
+        get() = rolls.sum() + bonuses.sum()
 
     override fun scoreToMark(score: Score): String {
         if (score == Score.Strike) return "X"
@@ -30,5 +32,4 @@ class FrameDataDelegate : FrameData {
             else -> return score.ordinal
         }
     }
-
 }

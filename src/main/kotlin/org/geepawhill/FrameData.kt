@@ -15,4 +15,5 @@ interface FrameData {
 
     fun scoreToMark(score: Score): String
     fun scoreToPins(score: Score): Int
+    val local: Int
 }

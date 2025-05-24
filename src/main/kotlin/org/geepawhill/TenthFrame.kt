@@ -20,4 +20,19 @@ class TenthFrame() : Frame, FrameData by FrameDataDelegate() {
         }
         return true
     }
+
+    override fun score(base: Int): Int {
+        val sum = base + local
+        if (isComplete()) {
+            total.value = sum.toString()
+        }
+        return sum
+    }
+
+    override fun bonus(pins: Int) {
+    }
+
+    private fun isComplete(): Boolean {
+        return rolls.size == 3 || !isStrike || !isSpare
+    }
 }
