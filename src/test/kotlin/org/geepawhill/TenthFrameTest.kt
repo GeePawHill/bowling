@@ -3,17 +3,8 @@ package org.geepawhill
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class FrameTest {
-    val frame = Frame()
+class TenthFrameTest {
     val tenth = Frame(true)
-
-    @Test
-    fun `normal rolls update ball fields`() {
-        frame.roll(Score.Three)
-        assertThat(frame.first.value).isEqualTo("3")
-        frame.roll(Score.Five)
-        assertThat(frame.second.value).isEqualTo("5")
-    }
 
     @Test
     fun `tenth rolls update ball fields`() {
@@ -21,17 +12,6 @@ class FrameTest {
         tenth.roll(Score.Spare)
         tenth.roll(Score.Five)
         assertThat(tenth.third.value).isEqualTo("5")
-    }
-
-    @Test
-    fun `normal rolls advance frame`() {
-        assertThat(frame.roll(Score.Four)).isFalse()
-        assertThat(frame.roll(Score.Five)).isTrue()
-    }
-
-    @Test
-    fun `normal rolls advance frame on strike`() {
-        assertThat(frame.roll(Score.Strike)).isTrue()
     }
 
     @Test
@@ -56,11 +36,5 @@ class FrameTest {
         assertThat(tenth.roll(Score.Four)).isFalse()
         assertThat(tenth.roll(Score.Spare)).isFalse()
         assertThat(tenth.roll(Score.Four)).isTrue()
-    }
-
-
-    @Test
-    fun `strike advances frame`() {
-        assertThat(frame.roll(Score.Strike)).isTrue()
     }
 }
