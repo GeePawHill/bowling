@@ -3,8 +3,8 @@ package org.geepawhill
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class NormalFrameTest {
-    val frame = Frame()
+class NormalNormalFrameTest {
+    val frame = NormalFrame()
 
     @Test
     fun `rolls update ball fields`() {

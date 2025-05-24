@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class TenthFrameTest {
-    val tenth = Frame(true)
+    val tenth = TenthFrame()
 
     @Test
     fun `tenth rolls update ball fields`() {

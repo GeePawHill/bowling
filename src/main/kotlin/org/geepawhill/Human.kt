@@ -20,5 +20,16 @@ class Human(override val name: String) : Player {
     }
 
     override val frames =
-        listOf(Frame(), Frame(), Frame(), Frame(), Frame(), Frame(), Frame(), Frame(), Frame(), Frame(true))
+        listOf(
+            NormalFrame(),
+            NormalFrame(),
+            NormalFrame(),
+            NormalFrame(),
+            NormalFrame(),
+            NormalFrame(),
+            NormalFrame(),
+            NormalFrame(),
+            NormalFrame(),
+            TenthFrame()
+        )
 }
