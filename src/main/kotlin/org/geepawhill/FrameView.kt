@@ -15,11 +15,11 @@ import org.geepawhill.Constants.Companion.THREE_FRAME_WIDTH
 
 @Composable
 fun FrameView(frame: Frame) {
-    Column(Modifier.width(if (frame.hasThird) THREE_FRAME_WIDTH else Constants.FRAME_WIDTH).border(1.dp, Color.Black)) {
+    Column(Modifier.width(if (frame.isTenth) THREE_FRAME_WIDTH else Constants.FRAME_WIDTH).border(1.dp, Color.Black)) {
         Row() {
             FirstBox(frame)
             SecondBox(frame)
-            if (frame.hasThird) ThirdBox(frame)
+            if (frame.isTenth) ThirdBox(frame)
         }
         Box(Modifier.fillMaxWidth(1f), contentAlignment = Alignment.Center) {
             Text(frame.total.value, fontSize = Constants.SCORE_FONT_SIZE, textAlign = TextAlign.Center)
