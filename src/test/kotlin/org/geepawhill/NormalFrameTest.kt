@@ -3,7 +3,7 @@ package org.geepawhill
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class NormalNormalFrameTest {
+class NormalFrameTest {
     val frame = NormalFrame()
 
     @Test
@@ -14,11 +14,18 @@ class NormalNormalFrameTest {
         assertThat(frame.second.value).isEqualTo("5")
     }
 
-//    @Test
-//    fun `marks update ball fields with symbol`() {
-//        frame.roll(Score.Strike)
-//        assertThat(frame.first.value).isEqualTo("X")
-//    }
+    @Test
+    fun `strike update ball fields with symbol`() {
+        frame.roll(Score.Strike)
+        assertThat(frame.first.value).isEqualTo("X")
+    }
+
+    @Test
+    fun `spare update ball fields with symbol`() {
+        frame.roll(Score.Three)
+        frame.roll(Score.Seven)
+        assertThat(frame.second.value).isEqualTo("/")
+    }
 
     @Test
     fun `two rolls advance frame`() {

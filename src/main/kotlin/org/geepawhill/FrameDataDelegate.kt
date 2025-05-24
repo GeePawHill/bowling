@@ -11,7 +11,7 @@ class FrameDataDelegate : FrameData {
     override val rolls = mutableListOf<Int>()
     override val bonuses = mutableListOf<Int>()
     override val isStrike: Boolean
-        get() = rolls.isNotEmpty() && rolls[0] == 0
+        get() = rolls.isNotEmpty() && rolls[0] == 10
     override val isSpare: Boolean
         get() = rolls.size == 2 && rolls[0] + rolls[1] == 10
 
