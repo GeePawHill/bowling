@@ -5,6 +5,5 @@ interface Frame : FrameData {
     fun roll(roll: Roll): Boolean
     fun possiblyComplete(accumulator: Int, bonus: Roll): Int
     fun score(base: Int): Int
-    fun bonus(roll: Roll)
     fun possiblyFill(accumulator: Int, roll: Roll): Boolean
 }

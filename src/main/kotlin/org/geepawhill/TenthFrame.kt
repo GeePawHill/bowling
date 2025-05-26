@@ -34,9 +34,6 @@ class TenthFrame() : Frame, FrameData by FrameDataDelegate() {
         return score(accumulator)
     }
 
-    override fun bonus(roll: Roll) {
-    }
-
     override fun possiblyFill(accumulator: Int, roll: Roll): Boolean {
         val isFull = roll(roll)
         score(accumulator)

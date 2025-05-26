@@ -22,7 +22,10 @@ class NormalFrame() : Frame, FrameData by FrameDataDelegate() {
     }
 
     override fun possiblyComplete(accumulator: Int, bonus: Roll): Int {
-        bonus(bonus)
+        if (bonusesNeeded > 0) {
+            bonusesNeeded -= 1
+            bonuses += scoreToPins(bonus)
+        }
         return score(accumulator)
     }
 
@@ -38,13 +41,6 @@ class NormalFrame() : Frame, FrameData by FrameDataDelegate() {
         val isFull = roll(roll)
         score(accumulator)
         return isFull
-    }
-
-    override fun bonus(roll: Roll) {
-        if (bonusesNeeded > 0) {
-            bonusesNeeded -= 1
-            bonuses += scoreToPins(roll)
-        }
     }
 
     private fun isComplete(): Boolean {

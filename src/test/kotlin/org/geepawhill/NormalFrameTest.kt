@@ -28,6 +28,13 @@ class NormalFrameTest {
     }
 
     @Test
+    fun `literal spare update ball fields with symbol`() {
+        frame.roll(Roll.Three)
+        frame.roll(Roll.Spare)
+        assertThat(frame.second.value).isEqualTo("/")
+    }
+
+    @Test
     fun `two rolls advance frame`() {
         assertThat(frame.roll(Roll.Four)).isFalse()
         assertThat(frame.roll(Roll.Five)).isTrue()
@@ -55,8 +62,8 @@ class NormalFrameTest {
     @Test
     fun `complete score with strike and two bonuses`() {
         frame.roll(Roll.Strike)
-        frame.bonus(Roll.Three)
-        frame.bonus(Roll.Four)
+        frame.possiblyComplete(0, Roll.Three)
+        frame.possiblyComplete(0, Roll.Four)
         assertThat(frame.score(0)).isEqualTo(17)
         assertThat(frame.total.value).isEqualTo("17")
     }
@@ -65,7 +72,7 @@ class NormalFrameTest {
     fun `complete score with spare and bonus`() {
         frame.roll(Roll.Three)
         frame.roll(Roll.Spare)
-        frame.bonus(Roll.Three)
+        frame.possiblyComplete(0, Roll.Three)
         assertThat(frame.score(0)).isEqualTo(13)
         assertThat(frame.total.value).isEqualTo("13")
     }
@@ -81,7 +88,7 @@ class NormalFrameTest {
     @Test
     fun `incomplete score with Strike and one bonus`() {
         frame.roll(Roll.Strike)
-        frame.bonus(Roll.Three)
+        frame.possiblyComplete(0, Roll.Three)
         assertThat(frame.score(0)).isEqualTo(13)
     }
 }
