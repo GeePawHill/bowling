@@ -29,10 +29,12 @@ class TenthFrame() : Frame, FrameData by FrameDataDelegate() {
         return sum
     }
 
-    override fun bonus(pins: Int) {
+    override fun bonus(score: Score) {
     }
 
     private fun isComplete(): Boolean {
-        return rolls.size == 3 || !isStrike || !isSpare
+        if (rolls.size == 3) return true
+        if (rolls.size == 2 && !isStrike && !isSpare) return true
+        return false
     }
 }

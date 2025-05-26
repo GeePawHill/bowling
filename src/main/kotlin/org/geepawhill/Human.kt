@@ -14,9 +14,22 @@ class NoPlayer : Player {
 
 class Human(override val name: String) : Player {
 
+    var currentIndex = 0
+    val current get() = frames[currentIndex]
 
     override fun roll(score: Score): Boolean {
-        return true
+        var base = 0
+        val shouldAdvance = current.roll(score)
+        for (frameIndex in 0 until currentIndex) {
+            frames[frameIndex].bonus(score)
+            base = frames[frameIndex].score(base)
+        }
+        current.score(base)
+        if (shouldAdvance) {
+            currentIndex += 1
+            return true
+        }
+        return false
     }
 
     override val frames =

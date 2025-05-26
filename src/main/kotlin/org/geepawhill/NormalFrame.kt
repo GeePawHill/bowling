@@ -29,10 +29,10 @@ class NormalFrame() : Frame, FrameData by FrameDataDelegate() {
         return sum
     }
 
-    override fun bonus(pins: Int) {
+    override fun bonus(score: Score) {
         if (bonusesNeeded > 0) {
             bonusesNeeded -= 1
-            bonuses += pins
+            bonuses += scoreToPins(score)
         }
     }
 

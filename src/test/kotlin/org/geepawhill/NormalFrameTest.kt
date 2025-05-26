@@ -39,24 +39,24 @@ class NormalFrameTest {
     }
 
     @Test
-    fun `score with two rolls`() {
+    fun `complete score with two rolls`() {
         frame.roll(Score.Four)
         frame.roll(Score.Five)
         assertThat(frame.score(0)).isEqualTo(9)
     }
 
     @Test
-    fun `incomplete score with strike`() {
+    fun `incomplete score with strike and no bonuses`() {
         frame.roll(Score.Strike)
         assertThat(frame.score(0)).isEqualTo(10)
         assertThat(frame.total.value).isEqualTo("")
     }
 
     @Test
-    fun `complete score with strike and bonuses`() {
+    fun `complete score with strike and two bonuses`() {
         frame.roll(Score.Strike)
-        frame.bonus(3)
-        frame.bonus(4)
+        frame.bonus(Score.Three)
+        frame.bonus(Score.Four)
         assertThat(frame.score(0)).isEqualTo(17)
         assertThat(frame.total.value).isEqualTo("17")
     }
@@ -65,15 +65,23 @@ class NormalFrameTest {
     fun `complete score with spare and bonus`() {
         frame.roll(Score.Three)
         frame.roll(Score.Spare)
-        frame.bonus(3)
+        frame.bonus(Score.Three)
         assertThat(frame.score(0)).isEqualTo(13)
         assertThat(frame.total.value).isEqualTo("13")
     }
 
     @Test
+    fun `incomplete score with spare and no bonus`() {
+        frame.roll(Score.Three)
+        frame.roll(Score.Spare)
+        assertThat(frame.score(0)).isEqualTo(10)
+        assertThat(frame.total.value).isEqualTo("")
+    }
+
+    @Test
     fun `incomplete score with Strike and one bonus`() {
         frame.roll(Score.Strike)
-        frame.bonus(3)
+        frame.bonus(Score.Three)
         assertThat(frame.score(0)).isEqualTo(13)
     }
 }
