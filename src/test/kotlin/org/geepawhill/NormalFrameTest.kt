@@ -8,87 +8,87 @@ class NormalFrameTest {
 
     @Test
     fun `rolls update ball fields`() {
-        frame.roll(Roll.Three)
+        frame.possiblyFill(0, Roll.Three)
         assertThat(frame.first.value).isEqualTo("3")
-        frame.roll(Roll.Five)
+        frame.possiblyFill(0, Roll.Five)
         assertThat(frame.second.value).isEqualTo("5")
     }
 
     @Test
     fun `strike update ball fields with symbol`() {
-        frame.roll(Roll.Strike)
+        frame.possiblyFill(0, Roll.Strike)
         assertThat(frame.first.value).isEqualTo("X")
     }
 
     @Test
     fun `spare update ball fields with symbol`() {
-        frame.roll(Roll.Three)
-        frame.roll(Roll.Seven)
+        frame.possiblyFill(0, Roll.Three)
+        frame.possiblyFill(0, Roll.Seven)
         assertThat(frame.second.value).isEqualTo("/")
     }
 
     @Test
     fun `literal spare update ball fields with symbol`() {
-        frame.roll(Roll.Three)
-        frame.roll(Roll.Spare)
+        frame.possiblyFill(0, Roll.Three)
+        frame.possiblyFill(0, Roll.Spare)
         assertThat(frame.second.value).isEqualTo("/")
     }
 
     @Test
     fun `two rolls advance frame`() {
-        assertThat(frame.roll(Roll.Four)).isFalse()
-        assertThat(frame.roll(Roll.Five)).isTrue()
+        assertThat(frame.possiblyFill(0, Roll.Four)).isFalse()
+        assertThat(frame.possiblyFill(0, Roll.Five)).isTrue()
     }
 
     @Test
     fun `strike advances frame`() {
-        assertThat(frame.roll(Roll.Strike)).isTrue()
+        assertThat(frame.possiblyFill(0, Roll.Strike)).isTrue()
     }
 
     @Test
     fun `complete score with two rolls`() {
-        frame.roll(Roll.Four)
-        frame.roll(Roll.Five)
-        assertThat(frame.score(0)).isEqualTo(9)
+        frame.possiblyFill(0, Roll.Four)
+        frame.possiblyFill(0, Roll.Five)
+        assertThat(frame.completeScoreIfPossible(0)).isEqualTo(9)
     }
 
     @Test
     fun `incomplete score with strike and no bonuses`() {
-        frame.roll(Roll.Strike)
-        assertThat(frame.score(0)).isEqualTo(10)
+        frame.possiblyFill(0, Roll.Strike)
+        assertThat(frame.completeScoreIfPossible(0)).isEqualTo(0)
         assertThat(frame.total.value).isEqualTo("")
     }
 
     @Test
     fun `complete score with strike and two bonuses`() {
-        frame.roll(Roll.Strike)
+        frame.possiblyFill(0, Roll.Strike)
         frame.possiblyComplete(0, Roll.Three)
         frame.possiblyComplete(0, Roll.Four)
-        assertThat(frame.score(0)).isEqualTo(17)
+        assertThat(frame.completeScoreIfPossible(0)).isEqualTo(17)
         assertThat(frame.total.value).isEqualTo("17")
     }
 
     @Test
     fun `complete score with spare and bonus`() {
-        frame.roll(Roll.Three)
-        frame.roll(Roll.Spare)
+        frame.possiblyFill(0, Roll.Three)
+        frame.possiblyFill(0, Roll.Spare)
         frame.possiblyComplete(0, Roll.Three)
-        assertThat(frame.score(0)).isEqualTo(13)
+        assertThat(frame.completeScoreIfPossible(0)).isEqualTo(13)
         assertThat(frame.total.value).isEqualTo("13")
     }
 
     @Test
     fun `incomplete score with spare and no bonus`() {
-        frame.roll(Roll.Three)
-        frame.roll(Roll.Spare)
-        assertThat(frame.score(0)).isEqualTo(10)
+        frame.possiblyFill(0, Roll.Three)
+        frame.possiblyFill(0, Roll.Spare)
+        assertThat(frame.completeScoreIfPossible(0)).isEqualTo(0)
         assertThat(frame.total.value).isEqualTo("")
     }
 
     @Test
     fun `incomplete score with Strike and one bonus`() {
-        frame.roll(Roll.Strike)
+        frame.possiblyFill(0, Roll.Strike)
         frame.possiblyComplete(0, Roll.Three)
-        assertThat(frame.score(0)).isEqualTo(13)
+        assertThat(frame.completeScoreIfPossible(0)).isEqualTo(0)
     }
 }

@@ -5,42 +5,41 @@ class NormalFrame() : Frame, FrameData by FrameDataDelegate() {
 
     override val isTenth: Boolean = false
 
-    var bonusesNeeded = 0
+    private var bonusesNeeded = 0
 
-    override fun roll(roll: Roll): Boolean {
-        val pins = scoreToPins(roll)
-        rolls += pins
-        val mark = scoreToMark(roll)
-        if (isStrike) bonusesNeeded = 2
-        if (isSpare) bonusesNeeded = 1
-        if (rolls.size == 1) {
-            first.value = mark
-            return isStrike
-        }
-        second.value = mark
-        return true
-    }
-
-    override fun possiblyComplete(accumulator: Int, bonus: Roll): Int {
+    override fun possiblyComplete(scoreSoFar: Int, bonus: Roll): Int {
         if (bonusesNeeded > 0) {
             bonusesNeeded -= 1
-            bonuses += scoreToPins(bonus)
+            bonuses += rollToPins(bonus)
         }
-        return score(accumulator)
+        return completeScoreIfPossible(scoreSoFar)
     }
 
-    override fun score(base: Int): Int {
-        val sum = base + local
-        if (isComplete()) {
-            total.value = sum.toString()
-        }
+    override fun possiblyFill(scoreSoFar: Int, roll: Roll): Boolean {
+        rolls += rollToPins(roll)
+        setBonusesNeeded()
+        setSymbol(roll)
+        completeScoreIfPossible(scoreSoFar)
+        return isStrike || rolls.size == 2
+    }
+
+    fun completeScoreIfPossible(scoreSoFar: Int): Int {
+        if (!isComplete()) return scoreSoFar
+        val sum = scoreSoFar + local
+        total.value = sum.toString()
         return sum
     }
 
-    override fun possiblyFill(accumulator: Int, roll: Roll): Boolean {
-        val isFull = roll(roll)
-        score(accumulator)
-        return isFull
+    private fun setSymbol(roll: Roll) {
+        when (rolls.size) {
+            1 -> first.value = rollToSymbol(roll)
+            else -> second.value = rollToSymbol(roll)
+        }
+    }
+
+    private fun setBonusesNeeded() {
+        if (isStrike) bonusesNeeded = 2
+        if (isSpare) bonusesNeeded = 1
     }
 
     private fun isComplete(): Boolean {

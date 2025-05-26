@@ -17,7 +17,7 @@ class FrameDataDelegate : FrameData {
     override val local: Int
         get() = rolls.sum() + bonuses.sum()
 
-    override fun scoreToMark(roll: Roll): String {
+    override fun rollToSymbol(roll: Roll): String {
         if (roll == Roll.Strike) return "X"
         if (roll == Roll.Spare) return "/"
         if (rolls.size == 2 && rolls.sum() == 10) return "/"
@@ -25,7 +25,7 @@ class FrameDataDelegate : FrameData {
         return roll.ordinal.toString()
     }
 
-    override fun scoreToPins(roll: Roll): Int {
+    override fun rollToPins(roll: Roll): Int {
         when (roll) {
             Roll.Strike -> return 10
             Roll.Spare -> return 10 - rolls[0]
