@@ -1,6 +1,6 @@
 package org.geepawhill
 
-enum class Score {
+enum class Roll {
     Zero,
     One,
     Two,

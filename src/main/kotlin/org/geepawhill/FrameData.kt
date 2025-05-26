@@ -13,7 +13,7 @@ interface FrameData {
     val isStrike: Boolean
     val isSpare: Boolean
 
-    fun scoreToMark(score: Score): String
-    fun scoreToPins(score: Score): Int
+    fun scoreToMark(roll: Roll): String
+    fun scoreToPins(roll: Roll): Int
     val local: Int
 }

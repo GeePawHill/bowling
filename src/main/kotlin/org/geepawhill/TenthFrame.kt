@@ -2,10 +2,10 @@ package org.geepawhill
 
 class TenthFrame() : Frame, FrameData by FrameDataDelegate() {
     override val isTenth: Boolean = true
-    override fun roll(score: Score): Boolean {
-        val pins = scoreToPins(score)
+    override fun roll(roll: Roll): Boolean {
+        val pins = scoreToPins(roll)
         rolls += pins
-        val mark = scoreToMark(score)
+        val mark = scoreToMark(roll)
         if (rolls.size == 1) {
             first.value = mark
             return false
@@ -29,7 +29,18 @@ class TenthFrame() : Frame, FrameData by FrameDataDelegate() {
         return sum
     }
 
-    override fun bonus(score: Score) {
+    override fun possiblyComplete(accumulator: Int, bonus: Roll): Int {
+        // no bonuses in tenth frame
+        return score(accumulator)
+    }
+
+    override fun bonus(roll: Roll) {
+    }
+
+    override fun possiblyFill(accumulator: Int, roll: Roll): Boolean {
+        val isFull = roll(roll)
+        score(accumulator)
+        return isFull
     }
 
     private fun isComplete(): Boolean {

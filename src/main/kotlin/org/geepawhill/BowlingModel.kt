@@ -15,8 +15,8 @@ class BowlingModel {
         current.value = players[0]
     }
 
-    fun roll(score: Score) {
-        if (current.value.roll(score)) nextPlayer()
+    fun roll(roll: Roll) {
+        if (current.value.possiblyFillFrame(roll)) nextPlayer()
     }
 
     private fun nextPlayer() {
@@ -27,8 +27,8 @@ class BowlingModel {
         } else current.value = players[index + 1]
     }
 
-    fun isEnabled(score: Score): Boolean {
-        if (score == Score.Six) return false
+    fun isEnabled(roll: Roll): Boolean {
+        if (roll == Roll.Six) return false
         else return true
     }
 

@@ -17,19 +17,19 @@ class FrameDataDelegate : FrameData {
     override val local: Int
         get() = rolls.sum() + bonuses.sum()
 
-    override fun scoreToMark(score: Score): String {
-        if (score == Score.Strike) return "X"
-        if (score == Score.Spare) return "/"
+    override fun scoreToMark(roll: Roll): String {
+        if (roll == Roll.Strike) return "X"
+        if (roll == Roll.Spare) return "/"
         if (rolls.size == 2 && rolls.sum() == 10) return "/"
-        if (score == Score.Zero) return "-"
-        return score.ordinal.toString()
+        if (roll == Roll.Zero) return "-"
+        return roll.ordinal.toString()
     }
 
-    override fun scoreToPins(score: Score): Int {
-        when (score) {
-            Score.Strike -> return 10
-            Score.Spare -> return 10 - rolls[0]
-            else -> return score.ordinal
+    override fun scoreToPins(roll: Roll): Int {
+        when (roll) {
+            Roll.Strike -> return 10
+            Roll.Spare -> return 10 - rolls[0]
+            else -> return roll.ordinal
         }
     }
 }

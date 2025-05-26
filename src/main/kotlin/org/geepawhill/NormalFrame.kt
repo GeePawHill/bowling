@@ -7,10 +7,10 @@ class NormalFrame() : Frame, FrameData by FrameDataDelegate() {
 
     var bonusesNeeded = 0
 
-    override fun roll(score: Score): Boolean {
-        val pins = scoreToPins(score)
+    override fun roll(roll: Roll): Boolean {
+        val pins = scoreToPins(roll)
         rolls += pins
-        val mark = scoreToMark(score)
+        val mark = scoreToMark(roll)
         if (isStrike) bonusesNeeded = 2
         if (isSpare) bonusesNeeded = 1
         if (rolls.size == 1) {
@@ -21,6 +21,11 @@ class NormalFrame() : Frame, FrameData by FrameDataDelegate() {
         return true
     }
 
+    override fun possiblyComplete(accumulator: Int, bonus: Roll): Int {
+        bonus(bonus)
+        return score(accumulator)
+    }
+
     override fun score(base: Int): Int {
         val sum = base + local
         if (isComplete()) {
@@ -29,10 +34,16 @@ class NormalFrame() : Frame, FrameData by FrameDataDelegate() {
         return sum
     }
 
-    override fun bonus(score: Score) {
+    override fun possiblyFill(accumulator: Int, roll: Roll): Boolean {
+        val isFull = roll(roll)
+        score(accumulator)
+        return isFull
+    }
+
+    override fun bonus(roll: Roll) {
         if (bonusesNeeded > 0) {
             bonusesNeeded -= 1
-            bonuses += scoreToPins(score)
+            bonuses += scoreToPins(roll)
         }
     }
 
