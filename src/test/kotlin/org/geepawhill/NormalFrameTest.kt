@@ -62,8 +62,8 @@ class NormalFrameTest {
     @Test
     fun `complete score with strike and two bonuses`() {
         frame.isFilledAfterScoring(0, Roll.Strike)
-        frame.scoreAndReportIfComplete(0, Roll.Three)
-        frame.scoreAndReportIfComplete(0, Roll.Four)
+        frame.scoreAndReportIfComplete(0, 3)
+        frame.scoreAndReportIfComplete(0, 4)
         assertThat(frame.completeScoreIfPossible(0)).isEqualTo(17)
         assertThat(frame.total.value).isEqualTo("17")
     }
@@ -72,7 +72,7 @@ class NormalFrameTest {
     fun `complete score with spare and bonus`() {
         frame.isFilledAfterScoring(0, Roll.Three)
         frame.isFilledAfterScoring(0, Roll.Spare)
-        frame.scoreAndReportIfComplete(0, Roll.Three)
+        frame.scoreAndReportIfComplete(0, 3)
         assertThat(frame.completeScoreIfPossible(0)).isEqualTo(13)
         assertThat(frame.total.value).isEqualTo("13")
     }
@@ -88,8 +88,16 @@ class NormalFrameTest {
     @Test
     fun `incomplete score with Strike and one bonus`() {
         frame.isFilledAfterScoring(0, Roll.Strike)
-        frame.scoreAndReportIfComplete(0, Roll.Three)
+        frame.scoreAndReportIfComplete(0, 3)
         assertThat(frame.completeScoreIfPossible(0)).isEqualTo(0)
+    }
+
+    @Test
+    fun `discovered score with Strike and one bonus`() {
+        frame.isFilledAfterScoring(0, Roll.Strike)
+        frame.scoreAndReportIfComplete(0, 0)
+        frame.scoreAndReportIfComplete(0, 10)
+        assertThat(frame.total.value).isEqualTo("20")
     }
 
 

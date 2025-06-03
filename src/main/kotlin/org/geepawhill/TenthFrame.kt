@@ -10,7 +10,7 @@ class TenthFrame() : Frame, FrameData by FrameDataDelegate() {
         return sum
     }
 
-    override fun scoreAndReportIfComplete(scoreSoFar: Int, bonus: Roll): Int {
+    override fun scoreAndReportIfComplete(scoreSoFar: Int, bonus: Int): Int {
         // no bonuses in tenth frame
         return score(scoreSoFar)
     }

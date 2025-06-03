@@ -7,10 +7,10 @@ class NormalFrame() : Frame, FrameData by FrameDataDelegate() {
 
     private var bonusesNeeded = 0
 
-    override fun scoreAndReportIfComplete(scoreSoFar: Int, bonus: Roll): Int {
+    override fun scoreAndReportIfComplete(scoreSoFar: Int, bonus: Int): Int {
         if (bonusesNeeded > 0) {
             bonusesNeeded -= 1
-            bonuses += rollToPins(bonus)
+            bonuses += bonus
         }
         return completeScoreIfPossible(scoreSoFar)
     }
