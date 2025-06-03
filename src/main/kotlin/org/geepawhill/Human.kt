@@ -19,7 +19,7 @@ class Human(override val name: String) : Player {
 
     override fun possiblyFillFrame(roll: Roll): Boolean {
         val scoreSoFar = possiblyCompletePriorFrames(roll)
-        if (current.possiblyFill(scoreSoFar, roll)) {
+        if (current.isFilledAfterScoring(scoreSoFar, roll)) {
             currentIndex += 1
             return true
         }
@@ -29,7 +29,7 @@ class Human(override val name: String) : Player {
     private fun possiblyCompletePriorFrames(bonus: Roll): Int {
         var scoreSoFar = 0
         for (frameIndex in 0 until currentIndex) {
-            scoreSoFar = frames[frameIndex].possiblyComplete(scoreSoFar, bonus)
+            scoreSoFar = frames[frameIndex].scoreAndReportIfComplete(scoreSoFar, bonus)
         }
         return scoreSoFar
     }

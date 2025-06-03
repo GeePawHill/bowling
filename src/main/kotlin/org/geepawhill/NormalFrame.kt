@@ -7,7 +7,7 @@ class NormalFrame() : Frame, FrameData by FrameDataDelegate() {
 
     private var bonusesNeeded = 0
 
-    override fun possiblyComplete(scoreSoFar: Int, bonus: Roll): Int {
+    override fun scoreAndReportIfComplete(scoreSoFar: Int, bonus: Roll): Int {
         if (bonusesNeeded > 0) {
             bonusesNeeded -= 1
             bonuses += rollToPins(bonus)
@@ -15,7 +15,7 @@ class NormalFrame() : Frame, FrameData by FrameDataDelegate() {
         return completeScoreIfPossible(scoreSoFar)
     }
 
-    override fun possiblyFill(scoreSoFar: Int, roll: Roll): Boolean {
+    override fun isFilledAfterScoring(scoreSoFar: Int, roll: Roll): Boolean {
         rolls += rollToPins(roll)
         setBonusesNeeded()
         setSymbol(roll)

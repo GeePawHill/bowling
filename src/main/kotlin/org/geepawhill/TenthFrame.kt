@@ -10,12 +10,12 @@ class TenthFrame() : Frame, FrameData by FrameDataDelegate() {
         return sum
     }
 
-    override fun possiblyComplete(scoreSoFar: Int, bonus: Roll): Int {
+    override fun scoreAndReportIfComplete(scoreSoFar: Int, bonus: Roll): Int {
         // no bonuses in tenth frame
         return score(scoreSoFar)
     }
 
-    override fun possiblyFill(scoreSoFar: Int, roll: Roll): Boolean {
+    override fun isFilledAfterScoring(scoreSoFar: Int, roll: Roll): Boolean {
         val isFull = roll(roll)
         score(scoreSoFar)
         return isFull
