@@ -100,5 +100,11 @@ class NormalFrameTest {
         assertThat(frame.total.value).isEqualTo("20")
     }
 
+    @Test
+    fun `empty frame has no Spare available`() {
+        assertThat(frame.availableRolls()).doesNotContain(
+            Roll.Spare
+        )
+    }
 
 }

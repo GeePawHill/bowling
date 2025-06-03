@@ -23,6 +23,11 @@ class NormalFrame() : Frame, FrameData by FrameDataDelegate() {
         return isStrike || rolls.size == 2
     }
 
+    fun availableRolls(): Set<Roll> {
+        if (rolls.isEmpty()) return Roll.values().toSet() - Roll.Spare
+        return emptySet()
+    }
+
     fun completeScoreIfPossible(scoreSoFar: Int): Int {
         if (!isComplete()) return scoreSoFar
         val sum = scoreSoFar + local
